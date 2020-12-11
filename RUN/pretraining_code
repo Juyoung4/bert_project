@@ -1,0 +1,30 @@
+BERT 사전 학습 코드
+! python src/make_bert_model/run_pretraining.py \
+--input_file=rsc/processed_training_data/paper_full_pretraining_data_tf_v4.record \
+--output_dir=rsc/my_pretrained_model \
+--do_train=True \
+--do_eval=True \
+--bert_config_file=rsc/conf/bert_config.json \
+--train_batch_size=16 \
+--max_seq_length=512 \
+--max_predictions_per_seq=20 \
+--num_train_steps=80000 \
+--learning_rate=5e-5 \
+--save_checkpoints_steps=1000 \
+--do_lower_case=True \
+--------------------------------------------------------------------
+성능 평가 코드
+
+! python src/make_bert_model/run_pretraining.py \
+--input_file=rsc/processed_training_data/paper_full_pretraining_data_tf_v4.record \
+--output_dir=rsc/my_pretrained_model \
+--do_train=False \
+--do_eval=True \
+--bert_config_file=rsc/conf/bert_config.json \
+--train_batch_size=16 \
+--max_seq_length=512 \
+--max_predictions_per_seq=20 \
+--num_train_steps=64000 \
+--learning_rate=5e-5 \
+--save_checkpoints_steps=1000 \
+--do_lower_case=True \

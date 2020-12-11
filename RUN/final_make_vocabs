@@ -1,0 +1,2 @@
+최종적인 vocab file 생성 -> mecab + wordpiece를 이용한
+! python createCustomVocab.py rsc/my_conf/FinalMecabVocab.txt rsc/my_conf/ices_eng_vocab_1000.txt  --custom=customvocab.txt

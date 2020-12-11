@@ -1,0 +1,3 @@
+!python make_json.py \
+--input_QA_path QnA_evaluate_dataset.csv \
+--input_Paper_path paper_evaluate.csv

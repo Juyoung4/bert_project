@@ -1,0 +1,6 @@
+mecab 사용시 영어 단어만 wordpiece이용
+
+! python src/make_vocab/wordpiece.py \
+--corpus=only_paper_data/paper_wordpiece_only_eng_v4.txt \
+--iter=1000 \
+--fname=only_paper_data/paper_wordpiece_only_eng_vocab_1000_v4.txt

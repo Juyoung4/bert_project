@@ -1,0 +1,3 @@
+! python paper_text_to_csv.py \
+--input_Paper_path=Paper_text_dataset\
+--input_QA_path=QnA_evaluate_dataset.csv

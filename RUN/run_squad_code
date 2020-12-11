@@ -1,0 +1,53 @@
+QA fine tuning 코드
+!CUDA_VISIBLE_DEVICES=1 python src/make_bert_model/run_squad.py \
+--vocab_file=rsc/my_conf/ices_vocab_v4_sejin.txt \
+--bert_config_file=rsc/conf/bert_config.json \
+--init_checkpoint=rsc/my_pretrained_model/model.ckpt-67000 \
+--do_train=True \
+--train_file=rsc/conf/KorQuAD_v1.0_train.json \
+--do_predict=True \
+--predict_file=rsc/conf/KorQuAD_v1.0_dev.json \
+--train_batch_size=16 \
+--learning_rate=5e-5 \
+--num_train_epochs=3.0 \
+--max_seq_length=512 \
+--doc_stride=64 \
+--output_dir=QA_output/korquad \
+--save_checkpoints_steps=200 \
+--do_lower_case=True
+
+------------------------------------------------------
+성능 평가 => nbest_prediction.json과 prediction.json파일 결과 도출
+
+!CUDA_VISIBLE_DEVICES=1 python src/make_bert_model/run_squad_2.py \
+--vocab_file=rsc/my_conf/ices_vocab_v4_sejin.txt \
+--bert_config_file=rsc/conf/bert_config.json \
+--init_checkpoint=QA_output/korquad/model.ckpt-400 \
+--do_train=False \
+--train_file=rsc/conf/QA_train.json \
+--do_predict=True \
+--predict_file=rsc/conf/QA_test.json \
+--train_batch_size=16 \
+--learning_rate=5e-5 \
+--num_train_epochs=3.0 \
+--max_seq_length=512 \
+--doc_stride=128 \
+--output_dir=QA_output/QA_output/predict \
+--save_checkpoints_steps=200 \
+--do_lower_case=True
+
+위 대신 간단하게 적어서 prediction 생성
+!CUDA_VISIBLE_DEVICES=1 python make_bert_model/run_squad.py \
+--vocab_file=./vocab/final_vocab.txt \
+--bert_config_file=./conf/bert_config.json \
+--do_train=False \
+--do_predict=True \
+--predict_file=./QA_test.json \
+--max_seq_length=512 \
+--output_dir=./QA_models/predict \
+--do_lower_case=False
+--------------------------------------------------------
+성능 평가 코드!
+!python evaluate-v1.1.py \
+rsc/conf/QA_test.json \
+QA_output/pre_57000/predict/predictions.json

@@ -1,0 +1,8 @@
+tf.record dataset 생성 코드
+
+!python src/make_preprocessed_data/create_pretraining_data.py \
+--input_file=rsc/training_data/paper_full_sentence_v4.txt \
+--vocab_file=rsc/my_conf/ices_vocab_v4_sejin.txt \
+--do_lower_case=True \
+--max_seq_length=512 \
+--output_file=rsc/processed_training_data/paper_full_pretraining_data_tf_v4.record
